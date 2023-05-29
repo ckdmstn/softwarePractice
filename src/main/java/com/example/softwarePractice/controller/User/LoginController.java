@@ -29,17 +29,20 @@ public class LoginController {
                               @RequestParam(value="forwardAction", required=false) String forwardAction,
                               Model model) throws Exception {
         Account account = accountService.getAccount(id, password);
+        System.out.println(forwardAction);
         if (account == null) {
-            return new ModelAndView("Error", "message",
+            return new ModelAndView("redirect:loginForm", "message",
                     "아이디 또는 패스워드가 잘못되었습니다.");
         } else {
             UserSession userSession = new UserSession(account);
             model.addAttribute("userSession", userSession);
 
-            if (forwardAction != null)
+            if (forwardAction != null) {
                 return new ModelAndView("redirect:" + forwardAction);
-            else
-                return new ModelAndView("redirect:" + "/main");
+            }
+            else {
+                return new ModelAndView("index"); // 뷰는 추후 수정
+            }
         }
     }
 }

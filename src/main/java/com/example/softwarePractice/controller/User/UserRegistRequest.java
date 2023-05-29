@@ -13,18 +13,20 @@ public class UserRegistRequest {
     private String passwordCheck;
     private String email;
     private String address;
+    private int zipcode;
     private String bankName;
     private String bankAccount;
     private String phoneNumber;
 
     public UserRegistRequest(String userName, String nickName, String id,
-                             String email, String address, String bankName,
+                             String email, String address, int zipcode, String bankName,
                              String bankAccount, String phoneNumber) {
         this.userName = userName;
         this.nickName = nickName;
         this.id = id;
         this.email = email;
         this.address = address;
+        this.zipcode = zipcode;
         this.bankName = bankName;
         this.bankAccount = bankAccount;
         this.phoneNumber = phoneNumber;
