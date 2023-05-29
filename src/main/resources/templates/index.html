@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>연습</title>
+    <title>main</title>
 </head>
 <body>
-완료
+<table style="width:100%;">
+    <tr>
+        <td>
+            <div th:unless="${userSession?.account}">
+                로그인전
+                <a th:href="@{/user/register}">
+                    <input type="button" value="회원가입"></a>
+                <a th:href="@{/user/loginForm}">
+                    <input type="button" value="로그인"></a>
+            </div>
+            <div th:if="${userSession?.account}">
+                로그인후
+                <a><span th:text="${userSession?.account.userName}"></span>님, 환영합니다!</a>
+                <a th:href="@{/user/logout}">
+                    <input type="button" value="로그아웃"></a>
+                <a th:href="@{/user/myPage}">
+                    <input type="button" value="마이페이지"></a>
+            </div>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
