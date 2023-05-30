@@ -2,10 +2,18 @@ package com.example.softwarePractice.controller.User;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Getter
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
+@Getter @Setter @ToString
 @NoArgsConstructor
-public class UserRegistRequest {
+@SuppressWarnings("serial")
+public class UserRegistRequest implements Serializable {
     private String userName;
     private String nickName;
     private String id;
@@ -13,13 +21,13 @@ public class UserRegistRequest {
     private String passwordCheck;
     private String email;
     private String address;
-    private int zipcode;
+    private String zipcode;
     private String bankName;
     private String bankAccount;
     private String phoneNumber;
 
     public UserRegistRequest(String userName, String nickName, String id,
-                             String email, String address, int zipcode, String bankName,
+                             String email, String address, String zipcode, String bankName,
                              String bankAccount, String phoneNumber) {
         this.userName = userName;
         this.nickName = nickName;
@@ -32,13 +40,12 @@ public class UserRegistRequest {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean isSamePasswordConfirmPassword() {
-        if (password == null || passwordCheck == null)
-            return false;
-        return password.equals(passwordCheck);
-    }
-
-    public boolean hasPassword() {
-        return password != null && password.trim().length() > 0;
+    public UserRegistRequest(String userName, String nickName, String id,
+                             String email, String phoneNumber) {
+        this.userName = userName;
+        this.nickName = nickName;
+        this.id = id;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 }
