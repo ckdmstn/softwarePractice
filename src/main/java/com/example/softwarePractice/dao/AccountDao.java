@@ -26,10 +26,10 @@ public class AccountDao {
     }
 
     @Transactional
-    public void updatePassword(int userId, String password) throws DataAccessException {
-        Query query = em.createQuery(
-                "UPDATE Account a SET a.password = :password WHERE a.user_id = :userId");
-        query.setParameter("userId", userId);
+    public void updatePassword(String id, String password) throws DataAccessException {
+        Query query = em.createNativeQuery(
+                "UPDATE Account a SET a.password = :password WHERE a.id = :id");
+        query.setParameter("id", id);
         query.setParameter("password", password);
         query.executeUpdate();
     }
