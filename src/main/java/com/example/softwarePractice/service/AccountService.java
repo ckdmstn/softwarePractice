@@ -20,9 +20,9 @@ public class AccountService {
     @Autowired
     private AccountDao accountDao;
 
-    // 사용자 PK로 계정 검색
-    public Account getAccount(int userId) {
-        Optional<Account> account = accountRepository.findById(userId);
+    // 사용자 ID로 계정 검색
+    public Account getAccount(String id) {
+        Optional<Account> account = accountRepository.findById(id);
         if (account.isPresent()) return account.get();
         return null;
     }
@@ -34,6 +34,12 @@ public class AccountService {
         return null;
     }
 
+    public boolean isIdExist(String id) {
+        Optional<Account> account = accountRepository.findById(id);
+        if (account.isPresent()) return true;
+        return false;
+    }
+
     // 새로운 계정 추가 후 다시 Account 반환 → 바로 로그인
     public Account insertAccount(UserRegistRequest memReq) {
         Account account = new Account();
@@ -43,14 +49,16 @@ public class AccountService {
         account.setPassword(memReq.getPassword());
         account.setEmail(memReq.getEmail());
         account.setAddress(memReq.getAddress());
-        account.setZipcode(memReq.getZipcode());
+        if (memReq.getZipcode() != null && memReq.getZipcode().length() == 5) {
+            account.setZipcode(Integer.parseInt(memReq.getZipcode()));
+        }
         account.setBankName(memReq.getBankName());
         account.setBankAccount(memReq.getBankAccount());
         account.setPhone(memReq.getPhoneNumber());
 
-        Account newAccount = accountDao.insertAccount(account);
+        accountDao.insertAccount(account);
 
-        return newAccount;
+        return account;
     }
 
     // 회원 정보 수정 후 다시 Account 반환
@@ -59,8 +67,8 @@ public class AccountService {
     }
 
     // 회원 정보 비밀번호 변경
-    public void updatePassword(int userId, String password) {
-        accountDao.updatePassword(userId, password);
+    public void updatePassword(String id, String password) {
+        accountDao.updatePassword(id, password);
     }
 
     // 회원 삭제
