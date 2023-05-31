@@ -14,11 +14,10 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/user/myPage")
+@RequestMapping("/user/myPage/update")
 @SessionAttributes("userSession")
 public class UpdateUserController {
     private static final String USER_MYPAGE_FORM = "user/myPageUpdateForm";
-    private static final String USER_MYPAGE = "user/myPage";
 
     @Autowired
     private AccountService accountService;
@@ -49,7 +48,7 @@ public class UpdateUserController {
         return new UserRegistRequest();
     }
 
-    @ModelAttribute("myPageList")
+    /*@ModelAttribute("myPageList")
     public int[] getMyPageList(HttpServletRequest request) { // 구매내역, 판매내역, 공동구매내역, 위시리스트 개수 반환
         if (request.getMethod().equalsIgnoreCase("GET")) {
             UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
@@ -65,15 +64,15 @@ public class UpdateUserController {
     @GetMapping
     public String show() {
         return USER_MYPAGE;
-    }
+    }*/
 
-    @GetMapping("/update")
+    @GetMapping
     public String showForm() {
         return USER_MYPAGE_FORM;
     }
 
     // 닉네임, 전화번호, 이메일, 주소, 은행명, 계좌번호만 변경 가능
-    @PostMapping("/update")
+    @PostMapping
     public String update(HttpServletRequest request,
                          @Valid @ModelAttribute("accountReq") UserRegistRequest accountReq,
                          BindingResult bindingResult) {
@@ -96,7 +95,7 @@ public class UpdateUserController {
         return "redirect:/" + "user/myPage";
     }
 
-    @PostMapping("/update/password")
+    @PostMapping("/password")
     public String updatePassword( HttpServletRequest request,
                                   @RequestParam("currentPassword") String currentPassword,
                                   @RequestParam("newPassword") String newPassword,
