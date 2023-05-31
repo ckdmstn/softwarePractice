@@ -21,8 +21,8 @@ public class AccountDao {
     }
 
     @Transactional
-    public void updateAccount(Account account) throws DataAccessException {
-        em.merge(account);
+    public Account updateAccount(Account account) throws DataAccessException {
+        return em.merge(account);
     }
 
     @Transactional

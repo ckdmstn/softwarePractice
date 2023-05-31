@@ -20,7 +20,6 @@ public class AccountFormValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "USER_NAME_REQUIRED", "이름은 필수 항목입니다.");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nickName", "NICK_NAME_REQUIRED", "닉네임은 필수 항목입니다.");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "PASSWORD_REQUIRED", "비밀번호는 필수 항목입니다.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordCheck", "PASSWORD_CHECK_REQUIRED", "비밀번호 확인은 필수 항목입니다.");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "EMAIL_REQUIRED", "이메일은 필수 항목입니다.");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "PHONE_REQUIRED", "전화번호는 필수 항목입니다.");
 
@@ -32,6 +31,10 @@ public class AccountFormValidator implements Validator {
         if (memReq.getZipcode() != null && memReq.getZipcode().length() > 0) { // null 또는 공백이 아니면 확인
             if (!memReq.getZipcode().matches("^\\d{5}$"))
                 errors.rejectValue("zipcode", "ZIPCODE_NOT_CORRECT", "잘못된 우편번호 형식입니다. ex)12345");
+        }
+
+        if (!memReq.getPassword().equals(memReq.getPasswordCheck())) { // 비번, 비번 확인이 다르면
+            errors.rejectValue("passwordCheck", "PW_CHECK_DIFF", "비밀번호가 다릅니다.");
         }
 
         // 이메일 형식 확인 (추후)

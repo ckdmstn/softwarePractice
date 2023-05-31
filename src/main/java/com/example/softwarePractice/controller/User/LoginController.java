@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @SessionAttributes("userSession")
 public class LoginController {
-    private static final String USER_LOGIN_FORM = "user/loginForm";
 
     @Autowired
     private AccountService accountService;
