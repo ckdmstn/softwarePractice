@@ -45,6 +45,18 @@ public class RegisterUserController {
                     account.getUserName(), account.getNickName(), account.getId(),
                     account.getEmail(), account.getPhone()
             );
+            if (account.getBankAccount() != null) {
+                memReq.setBankAccount(account.getBankAccount());
+            }
+            if (account.getBankName() != null) {
+                memReq.setBankName(account.getBankName());
+            }
+            if (account.getAddress() != null) {
+                memReq.setAddress(account.getAddress());
+            }
+            if (account.getZipcode() != null) {
+                memReq.setZipcode(account.getZipcode());
+            }
             return memReq;
         } else {
             return new UserRegistRequest();

@@ -49,9 +49,7 @@ public class AccountService {
         account.setPassword(memReq.getPassword());
         account.setEmail(memReq.getEmail());
         account.setAddress(memReq.getAddress());
-        if (memReq.getZipcode() != null && memReq.getZipcode().length() == 5) {
-            account.setZipcode(Integer.parseInt(memReq.getZipcode()));
-        }
+        account.setZipcode(memReq.getZipcode());
         account.setBankName(memReq.getBankName());
         account.setBankAccount(memReq.getBankAccount());
         account.setPhone(memReq.getPhoneNumber());

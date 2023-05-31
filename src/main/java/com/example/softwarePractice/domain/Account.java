@@ -26,7 +26,7 @@ public class Account {
     @NotNull
     private String email;
     private String address;
-    private int zipcode;
+    private String zipcode;
     @Column(name = "bank_name")
     private String bankName;
     @Column(name = "bank_account")
