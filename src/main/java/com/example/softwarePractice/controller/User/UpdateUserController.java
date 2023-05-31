@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -85,6 +86,7 @@ public class UpdateUserController {
         account.setPhone(accountReq.getPhoneNumber());
         account.setEmail(accountReq.getEmail());
         account.setAddress(accountReq.getAddress());
+        account.setZipcode(accountReq.getZipcode());
         account.setBankName(accountReq.getBankName());
         account.setBankAccount(accountReq.getBankAccount());
 
@@ -116,13 +118,13 @@ public class UpdateUserController {
         return "redirect:/" + "user/myPage";
     }
 
-    @PostMapping("/delete")
-    public String delete(HttpServletRequest request) {
+    @GetMapping("/delete")
+    public String delete(HttpServletRequest request, HttpSession session) throws Exception {
         UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
         Account account = userSession.getAccount();
         accountService.deleteAccount(account);
 
-        return "redirect:/" + "/main";
+        return "redirect:/" + "user/logout";
     }
 
     private static boolean isLoggedIn(UserSession userSession) {
