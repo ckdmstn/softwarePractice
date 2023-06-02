@@ -3,10 +3,14 @@ package com.example.softwarePractice.service;
 import com.example.softwarePractice.controller.User.UserRegistRequest;
 import com.example.softwarePractice.dao.AccountDao;
 import com.example.softwarePractice.domain.Account;
+import com.example.softwarePractice.domain.GroupItem;
+import com.example.softwarePractice.domain.PersonalItem;
 import com.example.softwarePractice.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,14 +84,60 @@ public class AccountService {
     }
 
     // 사용자 PK로 판매 내역 리스트 검색
-//    public List<PersonalItem> getSellItemList(String id) {
-//        return null;
-//    }
+    public List<PersonalItem> getSellItemList(String id) {
+        // 추후 수정 (지금은 확인용)
+
+        List<PersonalItem> itemList = new ArrayList<PersonalItem>();
+
+        PersonalItem item1 = new PersonalItem();
+        item1.setTitle("@@ 팝니다.");
+        item1.setDescription("상태 좋아요");
+        item1.setPrice(15000);
+        item1.setSellerId(id);
+        item1.setStatus(1);
+
+        PersonalItem item2 = new PersonalItem();
+        item2.setTitle("** 팝니다.");
+        item2.setDescription("상태 좀 안좋아요");
+        item2.setPrice(5000);
+        item2.setSellerId(id);
+        item2.setStatus(1);
+
+        itemList.add(item1);
+        itemList.add(item2);
+
+        return itemList;
+    }
 
     // 사용자 PK로 공동구매 판매 내역 리스트 검색
-//    public List<GroupItem> getSellGroupList(String id) {
-//        return null;
-//    }
+    public List<GroupItem> getSellGroupList(String id) {
+        // 추후 수정 (지금은 확인용)
+
+        List<GroupItem> itemList = new ArrayList<GroupItem>();
+
+        GroupItem item1 = new GroupItem();
+        item1.setTitle("@@ 공동구매");
+        item1.setDescription("공동구매 합니다");
+        item1.setPrice(5000);
+        item1.setSalesNow(0);
+        item1.setSalesTarget(300000);
+        item1.setStartDate(new Date());
+        item1.setSellerId(id);
+
+        GroupItem item2 = new GroupItem();
+        item2.setTitle("** 공동구매");
+        item2.setDescription("공동구매 합니다");
+        item2.setPrice(15000);
+        item2.setSalesNow(0);
+        item2.setSalesTarget(300000);
+        item2.setStartDate(new Date());
+        item2.setSellerId(id);
+
+        itemList.add(item1);
+        itemList.add(item2);
+
+        return itemList;
+    }
 
     // 사용자 PK로 구매 내역 리스트 검색
 //    public List<Order> getOrderList(String id) {
