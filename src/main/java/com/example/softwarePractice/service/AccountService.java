@@ -5,6 +5,7 @@ import com.example.softwarePractice.dao.AccountDao;
 import com.example.softwarePractice.domain.Account;
 import com.example.softwarePractice.domain.GroupItem;
 import com.example.softwarePractice.domain.PersonalItem;
+import com.example.softwarePractice.domain.SomsomItem;
 import com.example.softwarePractice.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -150,19 +151,14 @@ public class AccountService {
     }
 
     // 사용자 PK로 개인 판매 위시리스트 검색
-//    public List<PersonalItem> getPersonalWishlist(String id) {
-//        return null;
-//    }
+    public List<PersonalItem> getPersonalWishlist(String id) {
+        return getSellItemList(id); // 당연히 추후 수정
+    }
 
     // 사용자 PK로 공동구매 위시리스트 검색
-//    public List<GroupItem> getGroupWishlist(String id) {
-//        return null;
-//    }
-
-    // 사용자 PK로 학교 굿즈 위시리스트 검색
-//    public List<SomsomItem> getSomsomWishlist(String id) {
-//        return null;
-//    }
+    public List<GroupItem> getGroupWishlist(String id) {
+        return getSellGroupList(id); // 당연히 추후 수정
+    }
 
     // 해당 사용자에 해당 아이템 위시리스트 추가
     public void addWishlist(String id, int itemId) {
