@@ -1,10 +1,12 @@
 package com.example.softwarePractice.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.*;
 //import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,10 +17,10 @@ import java.util.List;
 @Entity
 @Table(name="ACCOUNT")
 public class Account {
-    @Id
+    @Id @Column(name = "account_id")
     private String id;
-    @NotNull @Column(name = "user_name")
-    private String userName;
+    @NotNull
+    private String name;
     @NotNull @Column(name = "nick_name")
     private String nickName;
     @NotNull
@@ -36,4 +38,7 @@ public class Account {
     //    수정 필요
     // private List<Integer> wishItem;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "account")
+    private List<Order> orders = new ArrayList<>();
 }

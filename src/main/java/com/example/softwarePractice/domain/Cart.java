@@ -10,7 +10,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Builder
 @Entity
 @Table(name="CART")
@@ -24,7 +23,7 @@ public class Cart {
     @NotNull
     private Account account;
     private long count;
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart_id")
     private List<CartItem> cartItems = new ArrayList<>();
     @NotNull
     private int total_quantity;
