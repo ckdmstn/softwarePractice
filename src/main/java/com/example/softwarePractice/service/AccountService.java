@@ -48,7 +48,7 @@ public class AccountService {
     // 새로운 계정 추가 후 다시 Account 반환 → 바로 로그인
     public Account insertAccount(UserRegistRequest memReq) {
         Account account = new Account();
-        account.setUserName(memReq.getUserName());
+        account.setName(memReq.getUserName());
         account.setNickName(memReq.getNickName());
         account.setId(memReq.getId());
         account.setPassword(memReq.getPassword());
@@ -86,28 +86,7 @@ public class AccountService {
 
     // 사용자 PK로 판매 내역 리스트 검색
     public List<PersonalItem> getSellItemList(String id) {
-        // 추후 수정 (지금은 확인용)
-
-        List<PersonalItem> itemList = new ArrayList<PersonalItem>();
-
-        PersonalItem item1 = new PersonalItem();
-        item1.setTitle("@@ 팝니다.");
-        item1.setDescription("상태 좋아요");
-        item1.setPrice(15000);
-        item1.setSellerId(id);
-        item1.setStatus(1);
-
-        PersonalItem item2 = new PersonalItem();
-        item2.setTitle("** 팝니다.");
-        item2.setDescription("상태 좀 안좋아요");
-        item2.setPrice(5000);
-        item2.setSellerId(id);
-        item2.setStatus(1);
-
-        itemList.add(item1);
-        itemList.add(item2);
-
-        return itemList;
+        return null;
     }
 
     // 사용자 PK로 공동구매 판매 내역 리스트 검색

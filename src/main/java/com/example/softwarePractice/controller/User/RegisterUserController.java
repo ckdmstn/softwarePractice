@@ -42,7 +42,7 @@ public class RegisterUserController {
             Account account = userSession.getAccount();
 
             UserRegistRequest memReq = new UserRegistRequest(
-                    account.getUserName(), account.getNickName(), account.getId(),
+                    account.getName(), account.getNickName(), account.getId(),
                     account.getEmail(), account.getPhone()
             );
             if (account.getBankAccount() != null) {

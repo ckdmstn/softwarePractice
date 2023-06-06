@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private static final String LOGIN_FORM = "user/loginForm";
+    private static final String PERSONAL_LIST = "personal/list";
 
     @Autowired
     @Qualifier(value = "loginInterceptor")
@@ -20,11 +21,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/user/loginForm").setViewName(LOGIN_FORM);
+        registry.addViewController("/personal/list").setViewName(PERSONAL_LIST);
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(interceptor) // 다음 url로 들어갈 경우, 바로 login Form으로 이동
-                .addPathPatterns("/personal/register", "/group/register"); // 알아서 수정!
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(interceptor) // 다음 url로 들어갈 경우, 바로 login Form으로 이동
+//                .addPathPatterns("/personal/register", "/group/register"); // 알아서 수정!
+//    }
 }
