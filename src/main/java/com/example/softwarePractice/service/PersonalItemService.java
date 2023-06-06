@@ -55,21 +55,7 @@ public class PersonalItemService {
 
     // 아이템 게시글 수정
     public PersonalItem updateItem(PersonalItemRequest itemRegistReq) {
-        PersonalItem item = new PersonalItem();
-        item.setId(itemRegistReq.getItemId());
-        item.setSellerId(itemRegistReq.getSellerId());
-        item.setTitle(itemRegistReq.getTitle());
-        item.setPrice(itemRegistReq.getPrice());
-        item.setDescription(itemRegistReq.getDescription());
-        if (itemRegistReq.getStatus().equals("거래가능")) {
-            item.setStatus(ItemStatus.INSTOCK);
-        } else if (itemRegistReq.getStatus().equals("거래중")) {
-            item.setStatus(ItemStatus.ING);
-        } else {
-            item.setStatus(ItemStatus.SOLDOUT);
-        }
-
-        return personalItemDao.updateItem(item);
+        return personalItemDao.updateItem(itemRegistReq);
     }
 
     // 아이템 게시글 삭제

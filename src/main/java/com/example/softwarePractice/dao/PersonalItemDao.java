@@ -1,5 +1,7 @@
 package com.example.softwarePractice.dao;
 
+import com.example.softwarePractice.controller.PersonalItem.PersonalItemRequest;
+import com.example.softwarePractice.domain.ItemStatus;
 import com.example.softwarePractice.domain.PersonalItem;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -26,8 +28,20 @@ public class PersonalItemDao {
     }
 
     @Transactional
-    public PersonalItem updateItem(PersonalItem personalItem) throws DataAccessException {
-        return em.merge(personalItem);
+    public PersonalItem updateItem(PersonalItemRequest itemRegistReq) throws DataAccessException {
+        PersonalItem personalItem = em.find(PersonalItem.class, itemRegistReq.getItemId());
+        personalItem.setTitle(itemRegistReq.getTitle());
+        personalItem.setPrice(itemRegistReq.getPrice());
+        personalItem.setDescription(itemRegistReq.getDescription());
+        if (itemRegistReq.getStatus().equals("거래가능")) {
+            personalItem.setStatus(ItemStatus.INSTOCK);
+        } else if (itemRegistReq.getStatus().equals("거래중")) {
+            personalItem.setStatus(ItemStatus.ING);
+        } else {
+            personalItem.setStatus(ItemStatus.SOLDOUT);
+        }
+
+        return personalItem;
     }
 
     @Transactional

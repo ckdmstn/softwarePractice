@@ -73,8 +73,6 @@ public class PersonalItemController {
 
         PersonalItem personalItem = personalItemService.searchItem(itemId);
 
-        System.out.println(personalItem.getStatus());
-
         PersonalItemRequest personalItemRequest = new PersonalItemRequest();
 
         personalItemRequest.setItemId(personalItem.getId());
@@ -89,8 +87,6 @@ public class PersonalItemController {
         } else {
             personalItemRequest.setStatus("거래완료");
         }
-
-        System.out.println(personalItemRequest.getStatus());
 
         mav.setViewName(PERSONAL_REGISTRATION_FORM);
         mav.addObject("statusString", new String[] {"거래가능", "거래중", "거래완료"});
