@@ -31,12 +31,6 @@ public class PersonalItemController {
         this.personalItemService = personalItemService;
     }
 
-    @Autowired
-    private AccountService accountService;
-    public void setAccountService(AccountService accountService) {
-        this.accountService = accountService;
-    }
-
     @GetMapping("/personal/register")
     public ModelAndView showRegisterForm(HttpServletRequest request) {
         UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
@@ -56,7 +50,7 @@ public class PersonalItemController {
     @PostMapping("/personal/register")
     public String register(HttpServletRequest request,
                                  @ModelAttribute("personalItem") PersonalItemRequest itemRegistReq,
-                                 BindingResult result) { // 추후엔 모델 삭제
+                                 BindingResult result) {
         // 입력 값 검증 추후 수정
 
         UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
@@ -108,7 +102,7 @@ public class PersonalItemController {
     @PostMapping("/user/myPage/sell/personal/update")
     public String update(HttpServletRequest request,
                                @ModelAttribute("personalItem") PersonalItemRequest itemRegistReq,
-                               BindingResult result) { // 추후엔 모델 삭제
+                               BindingResult result) {
         // 입력 값 검증 추후 수정
 
         if (result.hasErrors()) {
@@ -145,8 +139,6 @@ public class PersonalItemController {
     @RequestMapping("/personal/detail/{itemId}")
     public String showPersonalDetail(HttpServletRequest request,
                                      @PathVariable("itemId") long itemId, Model model) {
-        System.out.println("showPersonalDetail");
-
         PersonalItem personalItem = personalItemService.searchItem(itemId);
 
         model.addAttribute("personalItem", personalItem);
