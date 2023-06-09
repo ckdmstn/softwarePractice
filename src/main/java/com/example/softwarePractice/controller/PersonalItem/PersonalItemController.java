@@ -117,7 +117,7 @@ public class PersonalItemController {
 
         personalItemService.deleteItem(itemId);
 
-        return "personal/list";
+        return "redirect:/personal/list";
     }
 
     // 개인 거래 게시글 리스트
